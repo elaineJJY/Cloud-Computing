@@ -100,14 +100,15 @@ app.post('/api/books/', (req, res) => {
   //create a new object with the given body in request
   var book = new books(req.body);
 
-  //save the object into db
-  book.save();
-
   /*
-   * return the new book information object as js
-   */
-  var newBook = {};
-  res.json(newBook);
+ * return the new book information object as js
+ */
+
+  //save the object into db
+  book.save(function (err, savedBooks) {
+    res.json(savedBooks)
+  });
+
 });
 
 /*
@@ -121,19 +122,16 @@ app.put('/api/books/:id', (req, res) => {
   const bookNewData = req.body;
   console.log(`book ID = ${bookId} \n Book Data = ${bookNewData}`);
 
-  /*
-   * TODO: use the books model and find using the bookId and update the book information
-   */
-
   //find the book using ID
-  db.books.findById(bookId)
-
+  db.books.findOneAndUpdate({"_id":bookId},bookNewData);
 
   /*
    * Send the updated book information as a JSON object
    */
-  var updatedBookInfo = {};
-  res.json(updatedBookInfo);
+  db.books.findById(bookId, function(err,b){
+    res.json(b);
+  });
+
 });
 /*
  * Delete a book based upon the specified ID
@@ -143,15 +141,18 @@ app.delete('/api/books/:id', (req, res) => {
    * Get the book ID of book from the request parameters
    */
   const bookId = req.params.id;
+
   /*
-   * TODO: use the books model and find using
-   * the bookId and delete the book
-   */
+ * Send the updated book information as a JSON object
+ */
+
+  db.books.findByIdAndDelete(bookId, function (err, b) {
+    res.json(b)
+  })
+
   /*
    * Send the deleted book information as a JSON object
    */
-  var deletedBook = {};
-  res.json(deletedBook);
 });
 
 
