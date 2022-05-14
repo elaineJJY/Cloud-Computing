@@ -87,6 +87,7 @@ app.get('/api/books/', (req, res) => {
     res.json(books);
   });
 });
+
 /*
  * Add a book information into database
  */
@@ -123,16 +124,15 @@ app.put('/api/books/:id', (req, res) => {
   console.log(`book ID = ${bookId} \n Book Data = ${bookNewData}`);
 
   //find the book using ID
-  db.books.findOneAndUpdate({"_id":bookId},bookNewData);
-
-  /*
-   * Send the updated book information as a JSON object
-   */
-  db.books.findById(bookId, function(err,b){
+  db.books.findByIdAndUpdate(bookId,bookNewData,function(err,b){
     res.json(b);
   });
 
+
+
 });
+
+
 /*
  * Delete a book based upon the specified ID
  */
@@ -141,10 +141,6 @@ app.delete('/api/books/:id', (req, res) => {
    * Get the book ID of book from the request parameters
    */
   const bookId = req.params.id;
-
-  /*
- * Send the updated book information as a JSON object
- */
 
   db.books.findByIdAndDelete(bookId, function (err, b) {
     res.json(b)
