@@ -14,6 +14,8 @@ app.use(express.static(__dirname + '/public'));
  ************/
 
 const db = require('./models');
+const {Schema} = require("mongoose");
+const {books} = require("./models");
 
 /**********
  * ROUTES *
@@ -35,28 +37,38 @@ app.get('/', function homepage(req, res) {
 app.get('/api', (req, res) => {
   // TODO: Document all your api endpoints below as a simple hardcoded JSON object.
   res.json({
-    message: 'Welcome to my app api!',
-    documentationUrl: '', //leave this also blank for the first exercise
+    message: 'Welcome to my app api!', documentationUrl: '', //leave this also blank for the first exercise
     baseUrl: '', //leave this blank for the first exercise
-    endpoints: [
-      {method: 'GET', path: '/api', description: 'Describes all available endpoints'},
-      {method: 'GET', path: '/api/profile', description: 'Data about me'},
-      {method: 'GET', path: '/api/books/', description: 'Get All books information'},
-      // TODO: Write other API end-points description here like above
-    ]
+    endpoints: [{method: 'GET', path: '/api', description: 'Describes all available endpoints'}, {
+      method: 'GET',
+      path: '/api/profile',
+      description: 'Data about me'
+    }, {
+      method: 'GET',
+      path: '/api/books/',
+      description: 'Get All books information'
+    }, {
+      method: 'POST',
+      path: '/api/books/',
+      description: 'Create a new book Instance into database'
+    }, {
+      method: 'PUT',
+      path: '/api/books/:id',
+      description: 'Update the information of a book given a specific ID '
+    }, {
+      method: 'DELETE',
+      path: '/api/books/:id',
+      description: 'Delete a Book given a specific ID'
+    }]
   })
 });
-// TODO:  Fill the values
+
 app.get('/api/profile', (req, res) => {
   res.json({
-    'name': '',
-    'homeCountry': '',
-    'degreeProgram': '',//informatics or CSE.. etc
-    'email': '',
-    'deployedURLLink': '',//leave this blank for the first exercise
+    'name': 'Mario', 'homeCountry': 'Mario_Odyssey', 'degreeProgram': 'Throw_hat',//informatics or CSE.. etc
+    'email': 'Mario@switch.com', 'deployedURLLink': '',//leave this blank for the first exercise
     'apiDocumentationURL': '', //leave this also blank for the first exercise
-    'currentCity': '',
-    'hobbies': []
+    'currentCity': 'Hat_City', 'hobbies': ['Collect_Coins', 'Collect_Stars', 'Hit_enemies']
 
   })
 });
@@ -84,12 +96,15 @@ app.post('/api/books/', (req, res) => {
    * New Book information in req.body
    */
   console.log(req.body);
+
+  //create a new object with the given body in request
+  var book = new books(req.body);
+
+  //save the object into db
+  book.save();
+
   /*
-   * TODO: use the books model and create a new object
-   * with the information in req.body
-   */
-  /*
-   * return the new book information object as json
+   * return the new book information object as js
    */
   var newBook = {};
   res.json(newBook);
@@ -109,6 +124,11 @@ app.put('/api/books/:id', (req, res) => {
   /*
    * TODO: use the books model and find using the bookId and update the book information
    */
+
+  //find the book using ID
+  db.books.findById(bookId)
+
+
   /*
    * Send the updated book information as a JSON object
    */
