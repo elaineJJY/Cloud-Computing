@@ -39,12 +39,14 @@ app.get('/api', (req, res) => {
     baseUrl: '', //leave this blank for the first exercise
     endpoints: [
       {method: 'GET', path: '/api', description: 'Describes all available endpoints'},
+      {method: 'GET', path: '/api/exercise2', description: 'Print infomation'},
       {method: 'GET', path: '/api/profile', description: 'Data about me'},
       {method: 'GET', path: '/api/books/', description: 'Get All books information'},
       {method: 'POST', path: '/api/books/', description: 'Insert a new book information'},
       {method: 'PUT', path: '/api/books/', description: 'Update a book information, based on id'},
       {method: 'DELETE', path: '/api/books/', description: 'Delete a book information, based on id'},
       // TODO: Write other API end-points description here like above
+
     ]
   })
 });
@@ -143,9 +145,9 @@ app.delete('/api/books/:id', (req, res) => {
 /**********
  * SERVER *
  **********/
-app.get('/api/exercise2'),(req,res)=>{
-  res.send("245 application deployed using docker")
-}
+app.get('/api/exercise2', (req,res)=>{
+  res.send("group 245 application deployed using docker")
+});
 
 // listen on the port 3000
 app.listen(process.env.PORT || 3000, () => {

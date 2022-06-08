@@ -2,8 +2,8 @@ version: '3'
 services:
   server:
     build: ./server
-    image: elainejjy/245:latest
-    container_name: "245"
+    image: elainejjy/cloudcomputinggroup245:latest
+    container_name: "cloudcomputinggroup245"
     depends_on:
       - "mongodb"
     environment:
