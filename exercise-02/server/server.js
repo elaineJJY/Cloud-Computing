@@ -143,6 +143,9 @@ app.delete('/api/books/:id', (req, res) => {
 /**********
  * SERVER *
  **********/
+app.get('/api/exercise2'),(req,res)=>{
+  res.send("245 application deployed using docker")
+}
 
 // listen on the port 3000
 app.listen(process.env.PORT || 3000, () => {

@@ -1,7 +1,6 @@
 version: '3'
 services:
   server:
-    build: ./server
     image: elainejjy/245:latest
     container_name: "245"
     depends_on:
