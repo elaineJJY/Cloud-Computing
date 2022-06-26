@@ -8,12 +8,14 @@ module.exports = function (options) {
     //To DO: add the pattern functions and describe the logic inside the function
     function ProductPrice(msg,respond){
         var price = ""
-        for(data in mockData){
-            if(data.product_id==msg.prodectId){
+        for(index in mockData){
+            var data = mockData[index];
+            if(data.product_id==msg.productId){
                 price = data.product_price;
                 break;
             }
         }
+        console.log(price);
         respond(null, { result: price});
     }
 

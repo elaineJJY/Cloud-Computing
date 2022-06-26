@@ -10,8 +10,10 @@ module.exports = function (options) {
     //To DO: add the pattern functions and describe the logic inside the function
     function productURL(msg, respond) {
         var url = ""
-        for(data in mockData){
-            if(data.product_id==msg.prodectId){
+        
+        for(index in mockData){
+            var data = mockData[index];
+            if(data.product_id==msg.productId){
                 url = data.product_url;
                 break;
             }
@@ -21,8 +23,9 @@ module.exports = function (options) {
 
     function productName(msg, respond) {
         var name = ""
-        for(data in mockData){
-            if(data.product_id==msg.prodectId){
+        for(index in mockData){
+            var data = mockData[index];
+            if(data.product_id==msg.productId){
                 name = data.product_name;
                 break;
             }
