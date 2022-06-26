@@ -2,7 +2,7 @@ version: '3'
 services:
   server:
     build: ./server
-    image: HUB_ID/microservice:server
+    image: elainejjy/microservice:server
     ports:
       - "3000:3000"
     depends_on:
