@@ -1,0 +1,20 @@
+version: '3'
+services:
+  server:
+    image: elainejjy/microservice:server
+    ports:
+      - "3000:3000"
+    depends_on:
+      - hello-world-service
+      - product-descp-service
+      - product-price-service
+  hello-world-service:
+    build: ./hello-world-service
+    image: elainejjy/microservice:hello
+  product-descp-service:
+    build: ./product-descp-service
+    image: elainejjy/microservice:productdescp
+  product-price-service:
+    build: ./product-price-service
+    image: elainejjy/microservice:productprice
+
