@@ -11,11 +11,11 @@ services:
       - product-price-service
   hello-world-service:
     build: ./hello-world-service
-    image: HUB_ID/microservice:hello
+    image: elainejjy/microservice:hello
   product-descp-service:
     build: ./product-descp-service
-    image: HUB_ID/microservice:productdescp
+    image: elainejjy/microservice:productdescp
   product-price-service:
     build: ./product-price-service
-    image: HUB_ID/microservice:productprice
+    image: elainejjy/microservice:productprice
 
