@@ -1,6 +1,7 @@
 version: '3'
 services:
   server:
+    build: ./server
     image: elainejjy/microservice:server
     ports:
       - "3000:3000"
